@@ -6,3 +6,10 @@ export const addAlert = alert => ({
     alert
   }
 });
+
+export const deleteAlert = alert => ({
+  type: types.DELETE_ALERT,
+  payload: {
+    alert
+  }
+});

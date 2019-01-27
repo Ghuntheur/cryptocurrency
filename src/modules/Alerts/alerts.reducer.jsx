@@ -6,6 +6,7 @@ const alertsReducer = (state = initialAlertsState, action) => {
     case types.ADD_ALERT:
       const { alert } = action.payload;
       state.alerts.push(alert);
+
       return {
         alerts: [...new Set(state.alerts)]
       };
@@ -14,7 +15,9 @@ const alertsReducer = (state = initialAlertsState, action) => {
       return {};
 
     case types.DELETE_ALERT:
-      return {};
+      return {
+        alerts: state.alerts.filter(alert => alert !== action.payload.alert)
+      };
 
     default:
       return state;
