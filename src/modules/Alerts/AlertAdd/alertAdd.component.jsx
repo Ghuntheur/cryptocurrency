@@ -1,6 +1,8 @@
 import React from 'react';
 import { Row, Col } from 'react-grid-system';
 
+import './alertAdd.styles.scss';
+
 class AlertAdd extends React.Component {
   static STORAGE_KEY = 'allCurrencies';
 
@@ -51,27 +53,55 @@ class AlertAdd extends React.Component {
 
   render() {
     return (
-      <Row>
-        <Col>
-          <form onSubmit={this.handleSubmit}>
-            <select name="currency" value={this.state.alert.currency} onChange={this.handleChange}>
-              {this.state.allCurrencies.map(currency => (
-                <option key={currency.asset_id} value={currency.asset_id}>
-                  {currency.name}
-                </option>
-              ))}
-            </select>
-            <input
-              type="number"
-              min={0}
-              name="price"
-              placeholder="price"
-              onChange={this.handleChange}
-            />
+      <form onSubmit={this.handleSubmit} className="add-alert full-width background-grey-light">
+        <Row justify="between" nogutter className="padding-horizontal-3 padding-vertical-4">
+          <Col xl={4} className="form-group">
+            <Row nogutter>
+              <Col xl={10}>
+                <label htmlFor="currency" className="form-label">
+                  Currency
+                </label>
+                <select
+                  id="currency"
+                  className="form-input full-width"
+                  name="currency"
+                  value={this.state.alert.currency}
+                  onChange={this.handleChange}>
+                  {this.state.allCurrencies.map(currency => (
+                    <option key={currency.asset_id} value={currency.asset_id}>
+                      {currency.name}
+                    </option>
+                  ))}
+                </select>
+              </Col>
+            </Row>
+          </Col>
+          <Col xl={4} className="form-group">
+            <Row nogutter>
+              <Col xl={10}>
+                <label htmlFor="price" className="form-label">
+                  Price
+                </label>
+                <input
+                  id="price"
+                  type="number"
+                  min={0}
+                  name="price"
+                  placeholder="price"
+                  className="full-width form-input"
+                  onChange={this.handleChange}
+                />
+              </Col>
+            </Row>
+          </Col>
+          <Col xl={4}>compa</Col>
+        </Row>
+        <Row justify="center">
+          <Col align="center">
             <button type="submit">Add</button>
-          </form>
-        </Col>
-      </Row>
+          </Col>
+        </Row>
+      </form>
     );
   }
 }

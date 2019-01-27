@@ -5,6 +5,7 @@ import Header from 'modules/App/Header/header';
 import Email from 'modules/App/Email/email';
 
 import AlertAdd from 'modules/Alerts/AlertAdd/alertAdd.container';
+import AlertsList from 'modules/Alerts/AlertsList/alertsList.container';
 
 class App extends React.Component {
   render() {
@@ -13,7 +14,10 @@ class App extends React.Component {
         <Header />
         <Email />
 
-        <AlertAdd />
+        <div>
+          <AlertAdd />
+          <AlertsList />
+        </div>
       </Container>
     );
   }
