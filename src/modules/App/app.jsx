@@ -1,8 +1,10 @@
 import React from 'react';
 import { Container } from 'react-grid-system';
 
-import Header from 'components/Header/header';
-import Email from 'components/Email/email';
+import Header from 'modules/App/Header/header';
+import Email from 'modules/App/Email/email';
+
+import AlertAdd from 'modules/Alerts/AlertAdd/alertAdd.container';
 
 class App extends React.Component {
   render() {
@@ -10,6 +12,8 @@ class App extends React.Component {
       <Container className="margin-vertical-4">
         <Header />
         <Email />
+
+        <AlertAdd />
       </Container>
     );
   }
