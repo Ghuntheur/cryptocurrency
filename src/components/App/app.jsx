@@ -7,7 +7,7 @@ import Email from 'components/Email/email';
 class App extends React.Component {
   render() {
     return (
-      <Container>
+      <Container className="margin-vertical-4">
         <Header />
         <Email />
       </Container>
