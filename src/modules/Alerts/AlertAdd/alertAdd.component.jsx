@@ -11,7 +11,8 @@ class AlertAdd extends React.Component {
     this.state = {
       allCurrencies: [],
       alert: {
-        currency: 'ETH'
+        currency: 'BTC',
+        comparison: 'increase'
       }
     };
   }
@@ -69,7 +70,8 @@ class AlertAdd extends React.Component {
                   className="form-input full-width"
                   name="currency"
                   value={this.state.alert.currency}
-                  onChange={this.handleChange}>
+                  onChange={this.handleChange}
+                  required>
                   {this.state.allCurrencies.map(currency => (
                     <option key={currency.asset_id} value={currency.asset_id}>
                       {currency.name}
@@ -93,11 +95,45 @@ class AlertAdd extends React.Component {
                   placeholder="price"
                   className="full-width form-input"
                   onChange={this.handleChange}
+                  required
                 />
               </Col>
             </Row>
           </Col>
-          <Col xl={4}>compa</Col>
+          <Col xl={4} className="form-group">
+            <Row nogutter>
+              <Col xl={10}>
+                <label htmlFor="comparison" className="form-label">
+                  Comparison
+                </label>
+                <Row nogutter className="form-input">
+                  <Col xl={6}>
+                    <label htmlFor="increase">increase</label>
+                    <input
+                      id="increase"
+                      type="radio"
+                      value="increase"
+                      name="comparison"
+                      onChange={this.handleChange}
+                      checked={this.state.alert.comparison === 'increase'}
+                      required
+                    />
+                  </Col>
+                  <Col xl={6}>
+                    <label htmlFor="decrease">decrease</label>
+                    <input
+                      id="decrease"
+                      type="radio"
+                      value="decrease"
+                      name="comparison"
+                      onChange={this.handleChange}
+                      required
+                    />
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+          </Col>
         </Row>
         <Row justify="center">
           <Col align="center">
