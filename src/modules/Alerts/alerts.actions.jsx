@@ -7,6 +7,14 @@ export const addAlert = alert => ({
   }
 });
 
+export const editAlert = (alertBeforeEdition, alertEdited) => ({
+  type: types.EDIT_ALERT,
+  payload: {
+    alertBeforeEdition,
+    alertEdited
+  }
+});
+
 export const deleteAlert = alert => ({
   type: types.DELETE_ALERT,
   payload: {

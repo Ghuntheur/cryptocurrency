@@ -15,6 +15,9 @@ form {
       border: none;
       border-radius: 20px;
       outline: none;
+      &:disabled {
+        background: none;
+      }
     }
   }
 }

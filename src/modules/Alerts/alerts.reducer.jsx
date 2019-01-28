@@ -11,7 +11,11 @@ const alertsReducer = (state = initialAlertsState, action) => {
       };
 
     case types.EDIT_ALERT:
-      return {};
+      const index = state.alerts.indexOf(action.payload.alertBeforeEdition);
+      state.alerts[index] = action.payload.alertEdited;
+      return {
+        alerts: state.alerts
+      };
 
     case types.DELETE_ALERT:
       return {
