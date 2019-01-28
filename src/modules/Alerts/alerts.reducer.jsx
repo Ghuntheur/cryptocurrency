@@ -5,10 +5,9 @@ const alertsReducer = (state = initialAlertsState, action) => {
   switch (action.type) {
     case types.ADD_ALERT:
       const { alert } = action.payload;
-      state.alerts.push(alert);
 
       return {
-        alerts: [...new Set(state.alerts)]
+        alerts: [...state.alerts, alert]
       };
 
     case types.EDIT_ALERT:
