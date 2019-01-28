@@ -18,10 +18,12 @@ class AlertAdd extends React.Component {
 
   async componentDidMount() {
     const storage = JSON.parse(localStorage.getItem(AlertAdd.STORAGE_KEY));
+    const { addCurrencies } = this.props;
 
     // stock all currencies available in storage to avoid useless requests
     if (storage) {
-      this.setState({ allCurrencies: JSON.parse(localStorage.getItem(AlertAdd.STORAGE_KEY)) });
+      this.setState({ allCurrencies: storage });
+      addCurrencies(storage);
       return;
     }
 
@@ -36,6 +38,7 @@ class AlertAdd extends React.Component {
     localStorage.setItem(AlertAdd.STORAGE_KEY, JSON.stringify(allCurrenciesFiltered));
 
     this.setState({ allCurrencies: allCurrenciesFiltered });
+    addCurrencies(allCurrenciesFiltered);
   }
 
   handleChange = ev => {

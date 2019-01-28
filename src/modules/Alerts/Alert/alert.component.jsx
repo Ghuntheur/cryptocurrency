@@ -8,6 +8,8 @@ class Alert extends React.Component {
   }
 
   render() {
+    const { currencies, alert } = this.props;
+    console.log(currencies, alert);
     return <h1>ok</h1>;
   }
 }

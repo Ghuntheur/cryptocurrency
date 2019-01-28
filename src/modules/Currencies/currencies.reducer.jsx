@@ -6,7 +6,7 @@ const currenciesReducer = (state = initialCurrenciesState, action) => {
     case types.ADD_CURRENCIES:
       const { currencies } = action.payload;
       return {
-        currencies: currencies
+        currencies
       };
 
     default:
