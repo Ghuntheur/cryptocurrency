@@ -4,7 +4,6 @@ import { Row, Col } from 'react-grid-system';
 class Alert extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       editMode: false,
       alertBeforeEdition: this.props.alert,
@@ -12,11 +11,25 @@ class Alert extends React.Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props !== prevProps) {
+      this.setState({
+        alertBeforeEdition: this.props.alert,
+        alertEdited: this.props.alert
+      });
+    }
+  }
+
   handleEditMode = ev => {
     ev.preventDefault();
     this.setState({
       editMode: !this.state.editMode
     });
+  };
+
+  handleDelete = () => {
+    const { deleteAlert } = this.props;
+    deleteAlert(this.state.alertEdited);
   };
 
   handleChange = ev => {
@@ -39,7 +52,7 @@ class Alert extends React.Component {
   };
 
   render() {
-    const { currencies, alert } = this.props;
+    const { currencies } = this.props;
 
     return (
       <form onSubmit={this.handleSubmit} className="full-width background-grey-light">
@@ -54,8 +67,8 @@ class Alert extends React.Component {
                   id="currency"
                   className="form-input full-width"
                   name="currency"
-                  defaultValue={alert.currency}
                   disabled={!this.state.editMode}
+                  value={this.state.alertEdited.currency}
                   onChange={this.handleChange}>
                   {currencies.map(currency => (
                     <option key={currency.asset_id} value={currency.asset_id}>
@@ -79,7 +92,7 @@ class Alert extends React.Component {
                   name="price"
                   placeholder="price"
                   className="full-width form-input"
-                  defaultValue={alert.price}
+                  value={this.state.alertEdited.price}
                   disabled={!this.state.editMode}
                   onChange={this.handleChange}
                 />
@@ -92,6 +105,9 @@ class Alert extends React.Component {
           type={!this.state.editMode ? 'button' : 'submit'}
           onClick={!this.state.editMode ? this.handleEditMode : this.handleSubmit}>
           {!this.state.editMode ? 'Edit' : 'Save'}
+        </button>
+        <button type="button" onClick={this.handleDelete}>
+          Delete
         </button>
       </form>
     );
