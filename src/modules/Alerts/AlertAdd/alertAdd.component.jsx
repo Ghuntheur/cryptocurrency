@@ -4,7 +4,8 @@ import { Row, Col } from 'react-grid-system';
 import './alertAdd.styles.scss';
 
 class AlertAdd extends React.Component {
-  static STORAGE_KEY = 'allCurrencies';
+  static CURRENCIES_STORAGE_KEY = 'allCurrencies';
+  static ALERTS_STORAGE_KEY = 'alerts';
 
   form;
 
@@ -20,7 +21,7 @@ class AlertAdd extends React.Component {
   }
 
   async componentDidMount() {
-    const storage = JSON.parse(localStorage.getItem(AlertAdd.STORAGE_KEY));
+    const storage = JSON.parse(localStorage.getItem(AlertAdd.CURRENCIES_STORAGE_KEY));
     const { addCurrencies } = this.props;
 
     // stock all currencies available in storage to avoid useless requests
@@ -38,7 +39,7 @@ class AlertAdd extends React.Component {
       (currency, index) => currency.type_is_crypto === 1 && index < 30
     );
 
-    localStorage.setItem(AlertAdd.STORAGE_KEY, JSON.stringify(allCurrenciesFiltered));
+    localStorage.setItem(AlertAdd.CURRENCIES_STORAGE_KEY, JSON.stringify(allCurrenciesFiltered));
 
     this.setState({ allCurrencies: allCurrenciesFiltered });
     addCurrencies(allCurrenciesFiltered);
@@ -54,10 +55,16 @@ class AlertAdd extends React.Component {
     const { addAlert } = this.props;
     const { alert } = this.state;
 
-    addAlert({
-      ...alert,
-      createdAt: Date.now()
-    });
+    const newAlert = { ...alert, createdAt: Date.now() };
+
+    addAlert(newAlert);
+
+    // add in storage
+    const storage = localStorage.getItem(AlertAdd.ALERTS_STORAGE_KEY);
+    localStorage.setItem(
+      AlertAdd.ALERTS_STORAGE_KEY,
+      storage ? JSON.stringify([...JSON.parse(storage), newAlert]) : JSON.stringify([{ newAlert }])
+    );
 
     this.form.reset();
   };
