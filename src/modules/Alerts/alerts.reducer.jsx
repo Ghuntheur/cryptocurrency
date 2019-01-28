@@ -11,7 +11,9 @@ const alertsReducer = (state = initialAlertsState, action) => {
       };
 
     case types.EDIT_ALERT:
-      const index = state.alerts.indexOf(action.payload.alertBeforeEdition);
+      const index = state.alerts.findIndex(
+        alert => action.payload.alertEdited.createdAt === alert.createdAt
+      );
       state.alerts[index] = action.payload.alertEdited;
       return {
         alerts: state.alerts

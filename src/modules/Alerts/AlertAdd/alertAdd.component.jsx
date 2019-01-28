@@ -6,6 +6,8 @@ import './alertAdd.styles.scss';
 class AlertAdd extends React.Component {
   static STORAGE_KEY = 'allCurrencies';
 
+  form;
+
   constructor() {
     super();
     this.state = {
@@ -52,12 +54,20 @@ class AlertAdd extends React.Component {
     const { addAlert } = this.props;
     const { alert } = this.state;
 
-    addAlert(alert);
+    addAlert({
+      ...alert,
+      createdAt: Date.now()
+    });
+
+    this.form.reset();
   };
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className="add-alert full-width background-grey-light">
+      <form
+        onSubmit={this.handleSubmit}
+        ref={el => (this.form = el)}
+        className="add-alert full-width background-grey-light">
         <Row justify="between" nogutter className="padding-horizontal-3 padding-vertical-4">
           <Col xl={4} className="form-group">
             <Row nogutter>
@@ -90,6 +100,7 @@ class AlertAdd extends React.Component {
                 <input
                   id="price"
                   type="number"
+                  step={0.01}
                   min={0}
                   name="price"
                   placeholder="price"
