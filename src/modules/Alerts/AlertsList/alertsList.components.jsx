@@ -4,7 +4,7 @@ import * as emailjs from 'emailjs-com';
 import Alert from 'modules/Alerts/Alert/alert.container';
 
 class AlertsList extends React.Component {
-  static INTERVAL = 20 * 1000;
+  static INTERVAL = 60 * 1000;
 
   componentDidMount() {
     // init email js
