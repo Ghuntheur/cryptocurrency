@@ -200,6 +200,17 @@ class Alert extends React.Component {
                 </Row>
               </Col>
             </Row>
+            {this.state.editMode && (
+              <Row justify="center">
+                <Col align="center" xl={4} className="full-width">
+                  <button
+                    type="submit"
+                    className="button button--edit padding-vertical-2 margin-bottom-2 full-width">
+                    Edit
+                  </button>
+                </Col>
+              </Row>
+            )}
           </form>
         </Row>
       </div>

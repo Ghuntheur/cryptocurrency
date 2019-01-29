@@ -1,6 +1,5 @@
 import * as types from './alerts.types';
 import { initialAlertsState } from './alerts.states';
-import AlertAdd from './AlertAdd/alertAdd.component';
 
 const alertsReducer = (state = initialAlertsState, action) => {
   switch (action.type) {
@@ -16,14 +15,12 @@ const alertsReducer = (state = initialAlertsState, action) => {
         alert => action.payload.alertEdited.createdAt === alert.createdAt
       );
       state.alerts[index] = action.payload.alertEdited;
-      localStorage.setItem(AlertAdd.ALERTS_STORAGE_KEY, JSON.stringify(state.alerts));
       return {
         alerts: state.alerts
       };
 
     case types.DELETE_ALERT:
       const alertsFiltered = state.alerts.filter(alert => alert !== action.payload.alert);
-      localStorage.setItem(AlertAdd.ALERTS_STORAGE_KEY, JSON.stringify(alertsFiltered));
       return {
         alerts: alertsFiltered
       };

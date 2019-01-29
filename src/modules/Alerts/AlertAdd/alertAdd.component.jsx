@@ -5,7 +5,6 @@ import './alertAdd.styles.scss';
 
 class AlertAdd extends React.Component {
   static CURRENCIES_STORAGE_KEY = 'allCurrencies';
-  static ALERTS_STORAGE_KEY = 'alerts';
 
   form;
 
@@ -58,13 +57,6 @@ class AlertAdd extends React.Component {
     const newAlert = { ...alert, createdAt: Date.now() };
 
     addAlert(newAlert);
-
-    // add in storage
-    const storage = localStorage.getItem(AlertAdd.ALERTS_STORAGE_KEY);
-    localStorage.setItem(
-      AlertAdd.ALERTS_STORAGE_KEY,
-      storage ? JSON.stringify([...JSON.parse(storage), newAlert]) : JSON.stringify([{ newAlert }])
-    );
 
     this.form.reset();
   };
@@ -154,8 +146,12 @@ class AlertAdd extends React.Component {
           </Col>
         </Row>
         <Row justify="center">
-          <Col align="center">
-            <button type="submit">Add</button>
+          <Col align="center" xl={4}>
+            <button
+              className="button button--add padding-vertical-2 margin-bottom-2 full-width"
+              type="submit">
+              Add
+            </button>
           </Col>
         </Row>
       </form>

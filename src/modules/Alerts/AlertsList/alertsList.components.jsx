@@ -4,18 +4,12 @@ import * as emailjs from 'emailjs-com';
 import Alert from 'modules/Alerts/Alert/alert.container';
 
 class AlertsList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      alerts: []
-    };
-  }
-
   static INTERVAL = 20 * 1000;
 
   componentDidMount() {
     // init email js
     emailjs.init(process.env.REACT_APP_EMAILJS_API_KEY);
+
     setInterval(() => {
       this.props.alerts.forEach(alert => this.fetchCurrentPrice(alert));
     }, AlertsList.INTERVAL);
